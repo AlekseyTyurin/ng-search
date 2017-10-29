@@ -1,0 +1,28 @@
+
+.search-block {
+    margin-top: 40px;
+    margin-left: 20px;
+
+}
+
+/*select,*/
+/*button {*/
+    /*height: 32px;*/
+    /*border-radius: 3px;*/
+/*}*/
+
+/*input {*/
+    /*height: 25px;*/
+    /*width: 400px;*/
+    /*border-radius: 3px;*/
+/*}*/
+
+.error {
+    color: red;
+}
+.error-msg {
+    display: block;
+    position: absolute;
+    font-size: 75%;
+    bottom: -2em;
+}

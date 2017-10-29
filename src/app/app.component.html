@@ -1,0 +1,22 @@
+<div class="search-block">
+    <form [formGroup]="searchForm" (ngSubmit)="doSearch($event)">
+        <div class="form-row">
+            <div class="col-md-4">
+                <input class="form-control mb-2 mb-sm-0" type="text" formControlName="searchText"
+                       placeholder="Введите текст для поиска" required>
+            </div>
+            <div *ngIf="searchForm.controls['searchText'].errors" class="error-msg">
+                <div [hidden]="!searchForm.controls['searchText'].errors.required">Search request is required.</div>
+            </div>
+            <div class="col-auto">
+                <select name="search" class="form-control" formControlName="searchEngine">
+                    <option value="" disabled>Укажите поисковую систему...</option>
+                    <option value="google">Google</option>
+                    <option value="bing">Bing</option>
+                    <option value="ask">Ask</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-success" [disabled]="searchForm.invalid">Искать</button>
+        </div>
+    </form>
+</div>
