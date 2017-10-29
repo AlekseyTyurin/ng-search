@@ -9,24 +9,19 @@ import { FormGroup, FormControl } from '@angular/forms';
 })
 export class AppComponent implements OnInit {
 
+    constructor(private formBuilder: FormBuilder) {}
 
     searchForm: FormGroup;
 
     ngOnInit() {
-        this.createForm();
+        this.searchForm = this.formBuilder.group({
+            searchText: ["", Validators.required],
+            searchEngine: ["", [Validators.required]]
+        })
     }
 
-    private createForm() {
-        this.searchForm = new FormGroup({
-            // tslint:disable-next-line
-            searchText: new FormControl('', Validators.required),
-            searchEngine: new FormControl('', Validators.required),
-        });
-    }
 
     doSearch(event) {
-        console.log(event);
-        console.log(this.searchForm.value);
         if(this.searchForm.value.searchEngine == 'google')
             window.open("https://www.google.com/search?q=" + this.searchForm.value.searchText, "_blank");
         else if(this.searchForm.value.searchEngine == 'bing')

@@ -9,7 +9,7 @@
                 <div [hidden]="!searchForm.controls['searchText'].errors.required">Search request is required.</div>
             </div>
             <div class="col-auto">
-                <select name="search" class="form-control" formControlName="searchEngine">
+                <select class="form-control" formControlName="searchEngine">
                     <option value="" disabled>Укажите поисковую систему...</option>
                     <option value="google">Google</option>
                     <option value="bing">Bing</option>
