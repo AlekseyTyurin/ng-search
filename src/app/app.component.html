@@ -1,22 +1,25 @@
 <div class="search-block">
-    <form [formGroup]="searchForm" (ngSubmit)="doSearch($event)">
+    <form [formGroup]="searchForm" class="form-horizontal" (ngSubmit)="doSearch($event)">
         <div class="form-row">
-            <div class="col-md-4">
+            <div class="col-md-4" [ngClass]="displayFieldCss('searchText')">
                 <input class="form-control mb-2 mb-sm-0" type="text" formControlName="searchText"
                        placeholder="Введите текст для поиска" required>
+                <app-field-error-display [displayError]="isFieldValid('searchText')" errorMsg="Пожалуйста, заполните поисковый запрос">
+                </app-field-error-display>
             </div>
-            <div *ngIf="searchForm.controls['searchText'].errors" class="error-msg">
-                <div [hidden]="!searchForm.controls['searchText'].errors.required">Search request is required.</div>
-            </div>
-            <div class="col-auto">
-                <select class="form-control" formControlName="searchEngine">
+            <div class="col-md-3">
+                <select class="form-control" formControlName="searchEngine" [ngClass]="displayFieldCss('searchEngine')">
                     <option value="" disabled>Укажите поисковую систему...</option>
                     <option value="google">Google</option>
                     <option value="bing">Bing</option>
                     <option value="ask">Ask</option>
                 </select>
+                <app-field-error-display [displayError]="isFieldValid('searchEngine')" errorMsg="Пожалуйста, выберите поисковую систему">
+                </app-field-error-display>
             </div>
-            <button type="submit" class="btn btn-success" [disabled]="searchForm.invalid">Искать</button>
+            <div class="col-md-1">
+            <button type="submit" class="btn btn-success">Искать</button>
+            </div>
         </div>
     </form>
 </div>

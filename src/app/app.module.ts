@@ -4,10 +4,12 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
+import { FieldErrorDisplayComponent } from './field-error-display/field-error-display.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    FieldErrorDisplayComponent
   ],
   imports: [
     BrowserModule,

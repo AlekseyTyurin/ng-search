@@ -9,9 +9,9 @@ import { FormGroup, FormControl } from '@angular/forms';
 })
 export class AppComponent implements OnInit {
 
-    constructor(private formBuilder: FormBuilder) {}
+    public searchForm: FormGroup;
 
-    searchForm: FormGroup;
+    constructor(private formBuilder: FormBuilder) {}
 
     ngOnInit() {
         this.searchForm = this.formBuilder.group({
@@ -20,8 +20,19 @@ export class AppComponent implements OnInit {
         })
     }
 
+    isFieldValid(field: string) {
+        return !this.searchForm.get(field).valid && this.searchForm.get(field).touched;
+    }
+
+    displayFieldCss(field: string) {
+        return {
+            'has-error': this.isFieldValid(field),
+            'has-feedback': this.isFieldValid(field)
+        };
+    }
 
     doSearch(event) {
+        this.validateAllFormFields(this.searchForm);
         if(this.searchForm.value.searchEngine == 'google')
             window.open("https://www.google.com/search?q=" + this.searchForm.value.searchText, "_blank");
         else if(this.searchForm.value.searchEngine == 'bing')
@@ -30,4 +41,17 @@ export class AppComponent implements OnInit {
             window.open("https://www.ask.com/search?q=" + this.searchForm.value.searchText, "_blank");
 
     }
+
+    validateAllFormFields(formGroup: FormGroup) {
+        Object.keys(formGroup.controls).forEach(field => {
+            console.log(field);
+            const control = formGroup.get(field);
+            if (control instanceof FormControl) {
+                control.markAsTouched({ onlySelf: true });
+            } else if (control instanceof FormGroup) {
+                this.validateAllFormFields(control);
+            }
+        });
+    }
+
 }
