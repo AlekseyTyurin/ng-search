@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Validators, FormBuilder} from "@angular/forms";
-import { FormGroup, FormControl } from '@angular/forms';
+import {FormGroup, FormControl} from '@angular/forms';
 
 @Component({
     selector: 'app-root',
@@ -11,7 +11,8 @@ export class AppComponent implements OnInit {
 
     public searchForm: FormGroup;
 
-    constructor(private formBuilder: FormBuilder) {}
+    constructor(private formBuilder: FormBuilder) {
+    }
 
     ngOnInit() {
         this.searchForm = this.formBuilder.group({
@@ -33,21 +34,19 @@ export class AppComponent implements OnInit {
 
     doSearch(event) {
         this.validateAllFormFields(this.searchForm);
-        if(this.searchForm.value.searchEngine == 'google')
+        if (this.searchForm.value.searchEngine == 'google' && this.searchForm.value.searchText != "")
             window.open("https://www.google.com/search?q=" + this.searchForm.value.searchText, "_blank");
-        else if(this.searchForm.value.searchEngine == 'bing')
+        else if (this.searchForm.value.searchEngine == 'bing' && this.searchForm.value.searchText != "")
             window.open("https://www.bing.com/search?q=" + this.searchForm.value.searchText, "_blank");
-        else if(this.searchForm.value.searchEngine == 'ask')
+        else if (this.searchForm.value.searchEngine == 'ask' && this.searchForm.value.searchText != "")
             window.open("https://www.ask.com/search?q=" + this.searchForm.value.searchText, "_blank");
-
     }
 
     validateAllFormFields(formGroup: FormGroup) {
         Object.keys(formGroup.controls).forEach(field => {
-            console.log(field);
             const control = formGroup.get(field);
             if (control instanceof FormControl) {
-                control.markAsTouched({ onlySelf: true });
+                control.markAsTouched({onlySelf: true});
             } else if (control instanceof FormGroup) {
                 this.validateAllFormFields(control);
             }
